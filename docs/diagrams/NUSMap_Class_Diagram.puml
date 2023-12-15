@@ -1,0 +1,37 @@
+@startuml NUSMap Class Diagram
+
+class BusStop {
+    +String id
+    +String name
+    +String code
+    +Location coordinates
+    +String description
+}
+
+class Location {
+    +Double latitude
+    +Double longitude
+}
+
+class BusRoute {
+    +String id
+    +String routeNumber
+    +String name
+    +String description
+    +List<BusStop> stops
+    +Boolean isActive
+}
+
+class RouteSegment {
+    +BusStop startStop
+    +BusStop endStop
+    +Double distance
+    +Integer duration
+}
+
+BusStop "1" *-- "1" Location : has >
+BusStop "1" *-- "many" BusRoute : contains
+BusRoute "1" *-- "many" RouteSegment : consists of
+
+@enduml
+

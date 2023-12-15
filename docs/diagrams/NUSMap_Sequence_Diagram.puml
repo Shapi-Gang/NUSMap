@@ -1,0 +1,16 @@
+@startuml NUSMap Sequence Diagram
+
+actor User as user
+participant "Frontend" as FE
+participant "Backend" as BE
+database "MongoDB" as DB
+
+user -> FE: Select Starting Point
+user -> FE: Enter Destination
+FE -> BE: API Call: Get Routes Between Points
+BE -> DB: Query Bus Stops & Routes
+DB -> BE: Bus Stops & Routes Data
+BE -> FE: Bus Routes Options
+FE -> user: Display Routes
+
+@enduml

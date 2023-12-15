@@ -1,0 +1,35 @@
+@startuml NUSMap Component Diagram
+
+package "Frontend UI" {
+    [Bus Stop Locator] as BSL
+    [Route Planner] as RP
+    [Map Viewer] as MV
+}
+
+package "Backend Services" {
+    [Map Integration Service] as MIS
+    [Bus Stop Service] as BSS
+    [Route Service] as RS
+}
+
+database "MongoDB Database" {
+    [Bus Stop Data] as BSD
+    [Route Data] as RD
+}
+
+cloud {
+    [Map API]
+}
+
+[Frontend] ..> BSL : includes
+[Frontend] ..> RP : includes
+[Frontend] ..> MV : includes
+BSL --> BSS : uses
+RP --> RS : uses
+MV --> MIS : uses
+BSS --> BSD : queries
+RS --> BSD : queries
+RS --> RD : queries
+MIS --> [Map API] : fetches
+
+@enduml

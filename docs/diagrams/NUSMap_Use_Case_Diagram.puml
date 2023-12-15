@@ -1,0 +1,25 @@
+@startuml NUSMap Use Case Diagram
+
+left to right direction
+actor "User" as user
+actor "Administrator" as admin
+
+rectangle NUSMap {
+    usecase "View Campus Map" as UC1
+    usecase "Find Bus Routes" as UC2
+    usecase "Plan Travel Route" as UC3
+    usecase "Locate Bus Stops" as UC4
+    usecase "Update Bus Stop Info" as UC5
+    usecase "Update Bus Route Paths" as UC6
+    usecase "Manage Application Data" as UC7
+    
+    user --> UC1
+    user --> UC2
+    user --> UC3
+    user --> UC4
+    admin --> UC5
+    admin --> UC6
+    admin --> UC7
+}
+
+@enduml

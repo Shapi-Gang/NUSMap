@@ -1,0 +1,13 @@
+@startuml NUSMap Activity Diagram
+
+start
+:Access NUSMap;
+:View Campus Map;
+:Select Starting Point;
+:Select Destination;
+:Find Bus Routes Connecting Points;
+:Plan Travel Route Based on Bus Routes;
+:Locate Bus Stops on Route;
+stop
+
+@enduml
