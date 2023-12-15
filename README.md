@@ -1,6 +1,6 @@
 # NUSMap
 
-![concept](res\images\concept.png)
+![concept](res/images/concept.png)
 
 ## Project Overview
 
