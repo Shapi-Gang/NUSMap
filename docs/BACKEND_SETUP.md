@@ -1,5 +1,21 @@
 # NUSMap Backend Setup Guide
 
+```
+src/
+├── backend/
+│   ├── config/          # Environment configurations and global settings
+│   ├── controllers/     # Route controllers (or handlers)
+│   ├── db/              # Database connection and model definitions
+│   │   ├── models/      # Mongoose models (or schemas)
+│   │   └── index.js     # Database connection setup
+│   ├── middleware/      # Express middlewares (e.g., authentication, logging)
+│   ├── routes/          # Express route definitions
+│   ├── services/        # Business logic (services used by controllers)
+│   ├── utils/           # Utility functions and helpers
+│   └── app.js           # Entry point of the backend application
+├── frontend/            # Frontend source files
+```
+
 ## Step 1: Set Up Your Backend Environment
 
 ### Install Node.js and npm
@@ -70,13 +86,16 @@
 
 Certainly! Below is a more detailed guide for Step 4, which you can include in your `BACKEND_SETUP.md` file.
 
+Certainly, with the new directory structure, we'll place the database connection logic within the `db/` directory. Here's how you can update the MongoDB connection setup step in your `BACKEND_SETUP.md`:
+
+
 ## Step 4: Connect to MongoDB
 
-Connecting your Node.js application to MongoDB is crucial for storing and retrieving your application data. Follow these detailed steps to establish a connection using Mongoose, which provides a higher-level API for interacting with your MongoDB instance.
+Setting up a connection to MongoDB is a crucial step in enabling your application to interact with your database.
 
 ### Install Mongoose
 
-Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. To install Mongoose, run the following command in your terminal:
+First, you need to install Mongoose, which is an Object Data Modeling (ODM) library for MongoDB and Node.js:
 
 ```sh
 npm install mongoose
@@ -84,22 +103,22 @@ npm install mongoose
 
 ### Set Up MongoDB Connection
 
-#### Create a Database Connection File
+#### Create the Database Connection Logic
 
-1. In the `backend` directory, create a new file named `db.js`.
-2. Open `db.js` in your text editor.
+1. Navigate to the `backend/db/` directory.
+2. Create a file named `index.js` within the `db/` directory.
 
-#### Write the Connection Code
+#### Write the Database Connection Code
 
-Add the following code to `db.js` to set up the database connection:
+Add the following code to `backend/db/index.js` to establish the MongoDB connection using Mongoose:
 
 ```javascript
 const mongoose = require('mongoose');
 
 // Load environment variables from .env file
-require('dotenv').config();
+require('dotenv').config({ path: './backend/.env' });
 
-// Retrieve the connection string from the environment variable
+// Retrieve the MongoDB connection string from the environment variable
 const mongoURI = process.env.MONGODB_URI;
 
 // Connect to MongoDB
@@ -110,26 +129,26 @@ mongoose.connect(mongoURI, {
 .then(() => console.log('MongoDB connection established'))
 .catch((error) => console.error('MongoDB connection failed:', error.message));
 
-// Export the connection
-module.exports = mongoose.connection;
+// Export the mongoose connection
+module.exports = mongoose;
 ```
 
 #### Secure Your Connection String
 
-Storing your MongoDB connection URI in your source code is not secure. Instead, use a `.env` file to manage your environment variables.
+To keep your connection string secure, store it in an environment variable:
 
-1. In the root of your backend directory, create a file named `.env`.
-2. Add the following line to the `.env` file, replacing `<your_mongodb_uri>` with your actual MongoDB URI:
+1. In the root of your `backend` directory, create a `.env` file.
+2. Add your MongoDB URI to the `.env` file like this:
 
 ```env
-MONGODB_URI=<your_mongodb_uri>
+MONGODB_URI=mongodb+srv://<username>:<password>@<your_cluster_url>/<dbname>?retryWrites=true&w=majority
 ```
 
-#### Use the Connection in Your Application
+Replace `<username>`, `<password>`, `<your_cluster_url>`, and `<dbname>` with your actual MongoDB credentials and information.
 
-In your main server file (usually `app.js` or `server.js`), require the `db.js` file to ensure the database connection is established when your server starts.
+#### Integrate the Connection with Your Application
 
-Add this line to the top of your server file:
+To use the database connection, import it at the beginning of your `app.js`:
 
 ```javascript
 const db = require('./db');
@@ -137,12 +156,13 @@ const db = require('./db');
 
 ### Test Your Database Connection
 
-To test if your connection works:
+Run the following command to start your server:
 
-1. Start your server by running `nodemon` or `node app.js`.
-2. Check your terminal for the "MongoDB connection established" message.
+```sh
+npx nodemon backend/app.js
+```
 
-If there are any issues, the error message will provide more insight into what went wrong, allowing you to troubleshoot the connection.
+Look for a console message indicating a successful connection. If there are any connection issues, the error message will help diagnose the problem.
 
 
 ## Step 5: Define Routes and Models
