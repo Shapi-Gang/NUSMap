@@ -1,8 +1,21 @@
 @startuml NUSMap Use Case Diagram
+!define FONT_SIZE 14
 
 left to right direction
+
 actor "User" as user
 actor "Administrator" as admin
+
+skinparam actor {
+    BackgroundColor LightBlue
+    BorderColor Black
+}
+
+skinparam usecase {
+    BackgroundColor LightYellow
+    BorderColor Black
+    FontSize FONT_SIZE
+}
 
 rectangle NUSMap {
     usecase "View Campus Map" as UC1

@@ -1,4 +1,11 @@
 @startuml NUSMap Activity Diagram
+!define FONT_SIZE 12
+
+skinparam activity {
+    BackgroundColor LightYellow
+    BorderColor Black
+    FontSize FONT_SIZE
+}
 
 start
 :Access NUSMap;

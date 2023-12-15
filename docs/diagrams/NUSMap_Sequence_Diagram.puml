@@ -1,4 +1,21 @@
 @startuml NUSMap Sequence Diagram
+!define FONT_SIZE 12
+
+skinparam defaultFontSize FONT_SIZE
+skinparam actor {
+    BackgroundColor LightBlue
+    BorderColor Black
+}
+
+skinparam participant {
+    BackgroundColor LightGreen
+    BorderColor Black
+}
+
+skinparam database {
+    BackgroundColor LightYellow
+    BorderColor Black
+}
 
 actor User as user
 participant "Frontend" as FE

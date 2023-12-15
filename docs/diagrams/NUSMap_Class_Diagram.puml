@@ -1,4 +1,11 @@
 @startuml NUSMap Class Diagram
+!define FONT_SIZE 12
+
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor Black
+    FontSize FONT_SIZE
+}
 
 class BusStop {
     +String id
@@ -34,4 +41,3 @@ BusStop "1" *-- "many" BusRoute : contains
 BusRoute "1" *-- "many" RouteSegment : consists of
 
 @enduml
-

@@ -1,24 +1,47 @@
 @startuml NUSMap Component Diagram
+!define FONT_SIZE 12
+
+skinparam componentStyle uml2
 
 package "Frontend UI" {
     [Bus Stop Locator] as BSL
     [Route Planner] as RP
     [Map Viewer] as MV
+    skinparam package {
+        BackgroundColor LightBlue
+        BorderColor Black
+        FontSize FONT_SIZE
+    }
 }
 
 package "Backend Services" {
     [Map Integration Service] as MIS
     [Bus Stop Service] as BSS
     [Route Service] as RS
+    skinparam package {
+        BackgroundColor LightGreen
+        BorderColor Black
+        FontSize FONT_SIZE
+    }
 }
 
 database "MongoDB Database" {
     [Bus Stop Data] as BSD
     [Route Data] as RD
+    skinparam database {
+        BackgroundColor LightYellow
+        BorderColor Black
+        FontSize FONT_SIZE
+    }
 }
 
 cloud {
     [Map API]
+    skinparam cloud {
+        BackgroundColor LightGray
+        BorderColor Black
+        FontSize FONT_SIZE
+    }
 }
 
 [Frontend] ..> BSL : includes
