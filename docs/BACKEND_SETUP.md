@@ -28,7 +28,7 @@ src/
 - Run the initialization command:
   ```sh
   npm init -y
-  
+  ```
   This will create a `package.json` file with default settings.
 
 ## Step 2: Install Required Packages
@@ -37,16 +37,16 @@ src/
 - Install Express, which is a minimal and flexible Node.js web application framework:
   ```sh
   npm install express
-
+  ``````
 ### MongoDB Driver
 - Install the MongoDB driver:
   ```sh
   npm install mongodb
   ```
-  - Optionally, if you prefer using Mongoose for object modeling, run:
-    ```sh
-    npm install mongoose
-    ```
+- Optionally, if you prefer using Mongoose for object modeling, run:
+  ```sh
+  npm install mongoose
+  ```
 
 ### Other Useful Packages
 - Install Nodemon for development to automatically restart the server on file changes:
