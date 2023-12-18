@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const BusStop = require('../../../src/backend/models/busStop');
+const BusStop = require('../../../src/backend/models/Stop');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 // May require additional time for downloading MongoDB binaries
