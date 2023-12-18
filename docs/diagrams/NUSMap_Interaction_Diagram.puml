@@ -1,0 +1,55 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE busStopController {
+    + createBusStop(req, res)
+    + getBusStops(req, res)
+    + getBusStop(req, res)
+    + updateBusStop(req, res)
+    + deleteBusStop(req, res)
+}
+
+RECTANGLE dbIndex {
+    + connectToMongoDB()
+}
+
+RECTANGLE busStopEndpoints {
+    + router
+}
+
+RECTANGLE busStopModel {
+    - name
+    - code
+    - location
+    - description
+}
+
+RECTANGLE busRouteModel {
+    - name
+    - code
+    - stops
+}
+
+RECTANGLE insertTestDataScript {
+    + insertSampleData()
+}
+
+RECTANGLE App {
+    + initialize()
+    + startServer()
+}
+
+RECTANGLE MongoDB {
+    + Database
+}
+
+App --> dbIndex : initializes database connection
+dbIndex --> MongoDB : connects to the database
+App --> busStopEndpoints : registers endpoints
+busStopEndpoints --> busStopController : routes requests
+busStopController --> busStopModel : creates, queries, updates, and deletes data
+busStopController --> busRouteModel : creates, queries, updates, and deletes data
+insertTestDataScript --> busStopModel : inserts test data
+insertTestDataScript --> busRouteModel : inserts test data
+
+@enduml

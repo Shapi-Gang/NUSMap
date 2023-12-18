@@ -16,7 +16,7 @@ const busRouteSchema = new mongoose.Schema({
   },
   stops: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'BusStop',
+    ref: 'busStop',
     required: true
   }],
   active: {

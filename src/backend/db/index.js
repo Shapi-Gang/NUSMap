@@ -1,30 +1,34 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-require('dotenv').config({ path: '../.env' }); // Corrected path
- // Make sure this path points to the location of your .env file
 
-console.log('URI:', process.env.MONGODB_URI); // Debug statement to print the MongoDB URI
-
-const uri = process.env.MONGODB_URI;
-
-const client = new MongoClient(uri, {
-  tls: true,
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+// This function initializes the database connection
+async function connectToDatabase() {
+  require('dotenv').config({ path: '../.env' }); // Load environment variables
+  
+  const uri = process.env.MONGODB_URI;
+  console.log('URI:', uri); // Debug statement to print the MongoDB URI
+  
+  if (!uri) {
+    throw new Error('The MONGODB_URI environment variable is not set.');
   }
-});
+  
+  const client = new MongoClient(uri, {
+    tls: true,
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
 
-async function connect() {
   try {
     await client.connect();
     console.log("Connected successfully to MongoDB!");
+    return client;
   } catch (error) {
     console.error("Connection to MongoDB failed:", error);
-    process.exit(1); // Exit the process with an error code
+    throw error; // Rethrow the error to handle it in the calling code
   }
 }
 
-connect();
-
-module.exports = client;
+// Exports the connection function instead of the client
+module.exports = connectToDatabase;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const BusStop = require('../src/backend/models/BusStop');
-const BusRoute = require('../src/backend/models/BusRoute');
+const BusStop = require('../../../src/backend/models/busStop');
+const BusRoute = require('../../../src/backend/models/busRoute');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 jest.setTimeout(60000);
