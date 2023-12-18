@@ -1,6 +1,7 @@
 // src/backend/app.js
 
 const express = require('express');
+require('dotenv').config();
 const app = express();
 
 // Database connection
