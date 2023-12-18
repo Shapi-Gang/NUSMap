@@ -19,6 +19,10 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shapi-Gang/NUSMap.git"
+  },  
   "devDependencies": {
     "jest": "^29.7.0",
     "mongodb-memory-server": "^9.1.3",
