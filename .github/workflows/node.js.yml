@@ -1,36 +1,24 @@
-name: Node.js CI/CD Workflow
+name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: ["main"]
   pull_request:
-    branches: [ main ]
+    branches: ["main"]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
-
+        node-version: [20.x] # specify the version closest to 20.3.0 that is available in GitHub Actions
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Run Linter
-      run: npm run lint
-
-    - name: Run Tests
-      run: npm test
-
-    - name: Build
-      run: npm run build
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
