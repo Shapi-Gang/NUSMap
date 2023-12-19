@@ -1,8 +1,9 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const path = require('path');
 
 // This function initializes the database connection
 async function connectToDatabase() {
-  require('dotenv').config({ path: '../.env' }); // Load environment variables
+  require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
   
   const uri = process.env.MONGODB_URI;
   console.log('URI:', uri); // Debug statement to print the MongoDB URI

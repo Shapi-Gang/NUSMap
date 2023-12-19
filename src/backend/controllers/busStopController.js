@@ -14,9 +14,12 @@ exports.createBusStop = async (req, res) => {
 // Get all BusStops
 exports.getBusStops = async (req, res) => {
   try {
+    console.log('Fetching all bus stops...');
     const busStops = await BusStop.find({});
+    console.log(`Found ${busStops.length} bus stops`);
     res.status(200).send(busStops);
   } catch (error) {
+    console.error('Error fetching bus stops:', error);
     res.status(500).send(error);
   }
 };

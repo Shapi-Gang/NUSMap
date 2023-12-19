@@ -47,9 +47,10 @@ App --> dbIndex : initializes database connection
 dbIndex --> MongoDB : connects to the database
 App --> busStopEndpoints : registers endpoints
 busStopEndpoints --> busStopController : routes requests
-busStopController --> busStopModel : creates, queries, updates, and deletes data
-busStopController --> busRouteModel : creates, queries, updates, and deletes data
-insertTestDataScript --> busStopModel : inserts test data
-insertTestDataScript --> busRouteModel : inserts test data
+busStopController --> busStopModel : interacts with
+busStopController --> busRouteModel : interacts with
+insertTestDataScript --> MongoDB : inserts data directly using models
+busStopModel --> MongoDB : defines structure for bus stops
+busRouteModel --> MongoDB : defines structure for bus routes
 
 @enduml
