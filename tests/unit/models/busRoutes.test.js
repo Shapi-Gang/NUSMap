@@ -23,7 +23,7 @@ describe('BusRoute Model Test', () => {
     // Create bus stops first
     const busStop1 = await new BusStop({
       name: "Central Library",
-      code: "CLIB",
+      code: "CLI",
       location: {
         type: "Point",
         coordinates: [103.7725, 1.2966]
@@ -33,7 +33,7 @@ describe('BusRoute Model Test', () => {
 
     const busStop2 = await new BusStop({
       name: "Computer Center",
-      code: "COMCEN",
+      code: "COM",
       location: {
         type: "Point",
         coordinates: [103.7740, 1.2970]
