@@ -23,7 +23,6 @@ const busRouteSchema = new mongoose.Schema({
     type: Boolean,
     default: true // Useful if you want to enable/disable routes without deleting them
   }
-  // You can add more fields as needed
 });
 
 // If you plan to search or sort by name, you might also want to index the name field

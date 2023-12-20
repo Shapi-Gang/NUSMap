@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const busStop = require('../models/busStop'); // Update the path to the actual busStop model, now using camel case
 
-const testData = [
+const testStops = [
   {
     name: 'Central Library',
     code: 'CLIB',
@@ -131,7 +131,11 @@ const testData = [
   }  
 ];
 
-async function insertTestData() {
+/**
+ * Inserts test stop data into the database.
+ * @returns {Promise<void>} A promise that resolves when the test data is inserted successfully.
+ */
+async function insertTestStopData() {
   try {
     require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
     const mongoUri = process.env.MONGODB_URI;
@@ -145,7 +149,7 @@ async function insertTestData() {
     console.log('Database connection successful');
 
     await busStop.deleteMany({});
-    await busStop.insertMany(testData);
+    await busStop.insertMany(testStops);
     console.log('Test data inserted successfully!');
   } catch (error) {
     console.error('Error inserting test data:', error);
@@ -155,4 +159,4 @@ async function insertTestData() {
   }
 }
 
-insertTestData();
+insertTestStopData();

@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node --no-warnings ./src/backend/app.js",
     "test": "jest",
-    "insertTestData": "node ./src/backend/scripts/insertTestData.js"
+    "insertTestStopData": "node ./src/backend/scripts/insertTestStopData.js",
+    "insertTestRouteData": "node ./src/backend/scripts/insertTestRouteData.js"
   },
   "keywords": [],
   "author": "YF, WQ",
