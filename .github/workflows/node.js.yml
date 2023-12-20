@@ -7,11 +7,17 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        options: --health-cmd "mongosh --eval 'db.runCommand({ping: 1})'" --health-interval 10s --health-timeout 5s --health-retries 5
     strategy:
       matrix:
-        node-version: [20.x] # specify the version closest to 20.3.0 that is available in GitHub Actions
+        node-version: [20.x] # specify the Node.js version you are using
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -21,4 +27,20 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm test
+      - name: Run linters
+        run: npm run lint # replace with your linting script
+      - name: Run tests
+        run: npm test
+        env:
+          MONGODB_URI: mongodb://localhost:27017/mydb # replace with your MongoDB URI
+          NODE_ENV: test # if you have a separate environment for testing
+
+  deploy:
+    needs: build-and-test # This job runs after build-and-test has completed successfully
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' # Only run deployment on push to main
+    steps:
+      - name: Deploy to server
+        run: echo "Deployment step goes here" # Replace with your deployment script
+        env:
+          DEPLOYMENT_SECRET: ${{ secrets.DEPLOYMENT_SECRET }} # Use GitHub secrets to store sensitive information
